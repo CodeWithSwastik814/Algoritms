@@ -1,0 +1,98 @@
+================================================================
+           BUBBLE SORT ALGORITHM - DESCRIPTION
+================================================================
+
+OVERVIEW
+--------
+Bubble Sort is a simple comparison-based sorting algorithm that
+repeatedly steps through the list, compares adjacent elements,
+and swaps them if they are in the wrong order. The process is
+repeated until the list is fully sorted. The name comes from the
+way larger values "bubble up" to the end of the list with each pass.
+
+
+HOW THE ALGORITHM WORKS
+------------------------
+1. Start at the beginning of the list.
+2. Compare the first two adjacent elements.
+3. If the left element is greater than the right, swap them.
+4. Move one position forward and repeat the comparison.
+5. At the end of each pass, the largest unsorted element is placed
+   in its correct position.
+6. Repeat the process for the remaining unsorted portion of the list.
+7. An optimization flag (bs) is used: if no swaps occur during a
+   full pass, the list is already sorted and the algorithm stops
+   early, avoiding unnecessary iterations.
+
+
+STEP-BY-STEP EXAMPLE
+---------------------
+Input list: [14, 45, 28, 29, 49, 64, 815, 286, 99, 1]
+
+  Pass 1 -> 815 bubbles to the last position
+  Pass 2 -> 286 bubbles to the second-to-last position
+  Pass 3 -> 99 finds its correct position
+  ...
+  Final  -> [1, 14, 28, 29, 45, 49, 64, 99, 286, 815]
+
+
+SEARCH FEATURE
+--------------
+After sorting, the program asks the user to input a number.
+It then searches for that number in the sorted list using
+list.index() and prints its position (index). If the number
+is not found, it prints "item not found".
+
+
+TIME COMPLEXITY
+---------------
+  Best Case    (already sorted) : O(n)
+  Average Case                  : O(n^2)
+  Worst Case   (reverse sorted) : O(n^2)
+
+SPACE COMPLEXITY: O(1) — sorting is done in-place.
+
+
+KNOWN BUGS IN THE CODE
+-----------------------
+1. VARIABLE SHADOWING IN LOOPS:
+   Both the outer and inner loops use "i" as the loop variable.
+   The inner "i" overwrites the outer "i", breaking the
+   shrinking-window optimization. The inner variable should be
+   renamed to "j":
+
+      for j in range(0, x - i - 1):
+          if list[j] > list[j+1]:
+              list[j], list[j+1] = list[j+1], list[j]
+
+2. RESERVED NAMES USED AS VARIABLES:
+   The code uses "list" and "int" as variable names, which
+   shadows Python's built-in types and can cause unexpected
+   errors. Use descriptive names instead, e.g. "numbers"
+   and "user_input".
+
+
+CORRECTED CODE EXAMPLE
+-----------------------
+def bubble_sort(numbers):
+    x = len(numbers)
+    for i in range(x):
+        bs = False
+        for j in range(0, x - i - 1):
+            if numbers[j] > numbers[j+1]:
+                numbers[j], numbers[j+1] = numbers[j+1], numbers[j]
+                bs = True
+        if bs == False:
+            break
+
+numbers = [14, 45, 28, 29, 49, 64, 815, 286, 99, 1]
+bubble_sort(numbers)
+print(numbers)
+
+user_input = int(input())
+try:
+    print(numbers.index(user_input))
+except:
+    print("item not found")
+
+================================================================
