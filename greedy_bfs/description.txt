@@ -1,0 +1,53 @@
+File: Greedy_BFS.py
+Description:
+------------
+This Python script implements a Greedy Best-First Search (GBFS) algorithm applied
+to a hierarchical graph routing problem. It finds a path from a start node to a
+goal node by always prioritizing the neighbor with the lowest heuristic value
+(estimated cost to goal), without considering actual path cost.
+
+Key Components:
+---------------
+1. Node Class:
+   - Represents a graph node with a name and heuristic value.
+   - Supports comparison via __lt__ for use in a min-heap (priority queue).
+
+2. reconstruct_path():
+   - Traces back from the goal node to the start node using a parent-pointer
+     dictionary to return the full traversal path.
+
+3. greedy_best_first_search_hierarchical():
+   - Core search algorithm using a min-heap priority queue.
+   - Expands nodes greedily based on heuristic values.
+   - Tracks visited nodes to avoid revisiting.
+   - Incorporates a region_map for hierarchical context (region info per node).
+
+4. visualize_graph():
+   - Uses NetworkX and Matplotlib to draw the full graph.
+   - Highlights the found path in green.
+   - Annotates each node with its region number.
+
+Graph Setup:
+------------
+- 13 nodes: A through M, organized in a tree-like structure.
+- Heuristic values assigned manually to estimate distance to goal.
+- Nodes grouped into 3 regions via region_map.
+- Custom positions (pos) defined for a clear visual layout.
+
+Example Run:
+------------
+- Start Node : A
+- Goal Node  : M
+- Expected Path: A -> C -> F -> M  (or similar, based on heuristic guidance)
+
+Dependencies:
+-------------
+- heapq    (standard library)
+- networkx (pip install networkx)
+- matplotlib (pip install matplotlib)
+
+Note:
+-----
+The Node class uses single-underscore method names (_init_, _lt_) instead of
+the correct double-underscore dunder methods (__init__, __lt__), which will
+cause a runtime error. These should be corrected for the code to function properly.
