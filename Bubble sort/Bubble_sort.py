@@ -11,6 +11,7 @@ def bubble_short(list):
        if (bs == False) :
            break
 
+
 list = [14,45,28,29,49,64,815,286,99,1]
 
 bubble_short(list)
